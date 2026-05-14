@@ -12,16 +12,17 @@ const app = express();
 connectDB();
 app.use(express.json());
 
+// Маршрути
 app.use('/api/auth', authRoutes);
 app.use('/api/posts', postRoutes);
 app.use('/api/comments', commentRoutes);
 
 // 404
 app.use((req, res, next) => {
-    next(ApiError.notFound('Маршрут не знайдено'));
+    next(ApiError.notFound(`Маршрут ${req.originalUrl} не знайдено`));
 });
 
-// Обробник помилок
+// Глобальний обробник помилок
 app.use(errorHandler);
 
 module.exports = app;
