@@ -9,27 +9,27 @@ const userSchema = new mongoose.Schema({
     },
     email: {
         type: String,
-        required: [true, "Email є обов'язковим"],
-            unique: true,
-    lowercase: true,
-    trim: true,
-    match: [/^\S+@\S+\.\S+$/, 'Неправильний формат email']
-},
-password: {
-    type: String,
-        required: [true, "Пароль є обов'язковим"],
+        required: [true, 'Email є обов\'язковим'],
+        unique: true,
+        lowercase: true,
+        trim: true,
+        match: [/^\S+@\S+\.\S+$/, 'Невірний формат email']
+    },
+    password: {
+        type: String,
+        required: [true, 'Пароль є обов\'язковим'],
         minlength: [8, 'Пароль має містити хоча б 8 символів'],
         select: false
-},
-role: {
-    type: String,
-    enum: ['user', 'admin'],
-default: 'user'
-},
-createdAt: {
-    type: Date,
-default: Date.now
-}
+    },
+    role: {
+        type: String,
+        enum: ['user', 'admin'],
+        default: 'user'
+    },
+    createdAt: {
+        type: Date,
+        default: Date.now
+    }
 });
 
 module.exports = mongoose.model('User', userSchema);

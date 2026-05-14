@@ -6,13 +6,13 @@ const postV = require('../middlewares/validators/postValidator');
 const protect = require('../middlewares/protect');
 const restrictTo = require('../middlewares/restrictTo');
 
-// Публічні маршрути (не потребують токена)
+// Публічні маршрути
 router.get('/', postV.getPostsRules, validate, postController.getAllPosts);
 router.get('/search', postV.searchPostsRules, validate, postController.searchPosts);
 router.get('/:id', postV.mongoIdParamRule, validate, postController.getPostById);
 router.patch('/:id/like', postV.mongoIdParamRule, validate, postController.likePost);
 
-// Захищені маршрути (потребують токена)
+// Захищені маршрути
 router.post('/', protect, postV.createPostRules, validate, postController.createPost);
 router.put('/:id', protect, postV.updatePostRules, validate, postController.updatePost);
 
